@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>One More Lecture</title>
+<title>Koichi Oda Final Lecture</title>
 
 <style>
 html,body{
@@ -23,52 +23,62 @@ text-align:center;
 }
 
 .container{
-opacity:0;
-animation:fadeIn 1.5s ease forwards;
-animation-delay:.5s;
+max-width:1200px;
+padding:40px;
 }
 
 .name{
-font-size:90px;
+font-size:88px;
 font-weight:600;
-letter-spacing:8px;
+letter-spacing:10px;
 opacity:0;
-transform:translateY(12px);
-animation:appear 1.8s forwards;
-animation-delay:1s;
+transform:translateY(30px);
+animation:fadeUp 1.5s forwards;
+animation-delay:.6s;
 }
 
-.tagline{
-margin-top:22px;
-font-size:42px;
+.lecture{
+font-size:38px;
 font-weight:300;
-letter-spacing:1px;
+letter-spacing:6px;
+margin-top:24px;
 
 opacity:0;
-transform:translateY(20px);
-animation:appear 1.6s forwards;
-animation-delay:2.4s;
+transform:translateY(30px);
+animation:fadeUp 1.5s forwards;
+animation-delay:2.3s;
 }
 
-.subtitle{
-margin-top:10px;
-font-size:16px;
-letter-spacing:5px;
-opacity:0.45;
+.date{
+margin-top:90px;
+
+font-size:120px;
+font-weight:600;
+letter-spacing:6px;
 
 opacity:0;
-animation:fadeIn 1.5s forwards;
-animation-delay:3.1s;
+transform:scale(.92);
+animation:dateReveal 1.8s forwards;
+animation-delay:4s;
+}
+
+.date span{
+font-size:54px;
+font-weight:300;
+margin-left:18px;
+vertical-align:middle;
 }
 
 .clock{
 margin-top:70px;
+
 display:flex;
 justify-content:center;
 gap:18px;
+
 opacity:0;
-animation:fadeIn 1.5s forwards;
-animation-delay:3.4s;
+animation:fadeIn 1.4s forwards;
+animation-delay:5.5s;
 }
 
 .flipbox{
@@ -79,11 +89,13 @@ width:120px;
 background:#111;
 border-radius:18px;
 padding:28px 0;
-font-size:58px;
+
+font-size:56px;
 font-weight:200;
+
 box-shadow:
 inset 0 1px 0 rgba(255,255,255,.08),
-0 0 40px rgba(255,255,255,.02);
+0 0 40px rgba(255,255,255,.03);
 
 animation:pulse 1s infinite;
 }
@@ -92,10 +104,10 @@ animation:pulse 1s infinite;
 margin-top:12px;
 font-size:11px;
 letter-spacing:3px;
-opacity:.55;
+opacity:.5;
 }
 
-@keyframes appear{
+@keyframes fadeUp{
 to{
 opacity:1;
 transform:translateY(0);
@@ -108,32 +120,46 @@ opacity:1;
 }
 }
 
+@keyframes dateReveal{
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
 @keyframes pulse{
-0%{
-transform:translateY(0);
-}
-50%{
-transform:translateY(-2px);
-}
-100%{
-transform:translateY(0);
-}
+0%{transform:translateY(0);}
+50%{transform:translateY(-2px);}
+100%{transform:translateY(0);}
 }
 
 @media(max-width:900px){
 
 .name{
-font-size:54px;
+font-size:52px;
 letter-spacing:4px;
 }
 
-.tagline{
-font-size:28px;
+.lecture{
+font-size:24px;
+}
+
+.date{
+font-size:56px;
+margin-top:55px;
+}
+
+.date span{
+display:block;
+font-size:30px;
+margin-top:10px;
+margin-left:0;
 }
 
 .clock{
 flex-wrap:wrap;
 gap:12px;
+margin-top:50px;
 }
 
 .flipbox{
@@ -141,10 +167,11 @@ width:90px;
 }
 
 .flip{
-font-size:40px;
-padding:20px 0;
+font-size:38px;
+padding:18px 0;
 }
 }
+
 </style>
 </head>
 
@@ -153,15 +180,15 @@ padding:20px 0;
 <div class="container">
 
 <div class="name">
-Koichi ODA
+KOICHI ODA
 </div>
 
-<div class="tagline">
-One More Lecture.
-</div>
-
-<div class="subtitle">
+<div class="lecture">
 FINAL LECTURE
+</div>
+
+<div class="date">
+2027.03.06<span>Sat</span>
 </div>
 
 <div class="clock">
@@ -193,30 +220,41 @@ FINAL LECTURE
 <script>
 
 const target =
-new Date("2027-03-15T00:00:00").getTime();
+new Date("2027-03-06T00:00:00").getTime();
 
 function pad(n){
-return String(n).padStart(2,'0');
+return String(n).padStart(2,"0");
 }
 
 function updateCountdown(){
 
-const now=new Date().getTime();
-let diff=target-now;
+const now = new Date().getTime();
+
+let diff = target-now;
 
 if(diff<0){diff=0;}
 
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor(
-(diff%(1000*60*60*24))/(1000*60*60)
+const days=
+Math.floor(
+diff/(1000*60*60*24)
 );
 
-const minutes=Math.floor(
-(diff%(1000*60*60))/(1000*60)
+const hours=
+Math.floor(
+(diff%(1000*60*60*24))/
+(1000*60*60)
 );
 
-const seconds=Math.floor(
-(diff%(1000*60))/1000
+const minutes=
+Math.floor(
+(diff%(1000*60*60))/
+(1000*60)
+);
+
+const seconds=
+Math.floor(
+(diff%(1000*60))/
+1000
 );
 
 document.getElementById("days").innerText=days;
