@@ -1,62 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>One More Lecture</title>
+
 <style>
-body{
+html,body{
 margin:0;
+height:100%;
 background:#000;
 color:#fff;
-height:100vh;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+overflow:hidden;
+}
+
+body{
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
-font-family:-apple-system,BlinkMacSystemFont,sans-serif;
 }
-h1{
-font-size:72px;
+
+.container{
+opacity:0;
+animation:fadeIn 1.5s ease forwards;
+animation-delay:.5s;
+}
+
+.name{
+font-size:90px;
 font-weight:600;
-margin-bottom:20px;
+letter-spacing:8px;
+opacity:0;
+transform:translateY(12px);
+animation:appear 1.8s forwards;
+animation-delay:1s;
 }
-h2{
+
+.tagline{
+margin-top:22px;
+font-size:42px;
 font-weight:300;
-opacity:.8;
-margin-bottom:40px;
+letter-spacing:1px;
+
+opacity:0;
+transform:translateY(20px);
+animation:appear 1.6s forwards;
+animation-delay:2.4s;
 }
-#countdown{
-font-size:88px;
+
+.subtitle{
+margin-top:10px;
+font-size:16px;
+letter-spacing:5px;
+opacity:0.45;
+
+opacity:0;
+animation:fadeIn 1.5s forwards;
+animation-delay:3.1s;
+}
+
+.clock{
+margin-top:70px;
+display:flex;
+justify-content:center;
+gap:18px;
+opacity:0;
+animation:fadeIn 1.5s forwards;
+animation-delay:3.4s;
+}
+
+.flipbox{
+width:120px;
+}
+
+.flip{
+background:#111;
+border-radius:18px;
+padding:28px 0;
+font-size:58px;
 font-weight:200;
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.08),
+0 0 40px rgba(255,255,255,.02);
+
+animation:pulse 1s infinite;
+}
+
+.label{
+margin-top:12px;
+font-size:11px;
+letter-spacing:3px;
+opacity:.55;
+}
+
+@keyframes appear{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes fadeIn{
+to{
+opacity:1;
+}
+}
+
+@keyframes pulse{
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-2px);
+}
+100%{
+transform:translateY(0);
+}
+}
+
+@media(max-width:900px){
+
+.name{
+font-size:54px;
+letter-spacing:4px;
+}
+
+.tagline{
+font-size:28px;
+}
+
+.clock{
+flex-wrap:wrap;
+gap:12px;
+}
+
+.flipbox{
+width:90px;
+}
+
+.flip{
+font-size:40px;
+padding:20px 0;
+}
 }
 </style>
 </head>
 
 <body>
-<div>
-<h1>One More Lecture.</h1>
-<h2>Professor Koichi Oda</h2>
-<div id="countdown"></div>
+
+<div class="container">
+
+<div class="name">
+KOICHI ODA
+</div>
+
+<div class="tagline">
+One More Lecture.
+</div>
+
+<div class="subtitle">
+FINAL LECTURE
+</div>
+
+<div class="clock">
+
+<div class="flipbox">
+<div class="flip" id="days">000</div>
+<div class="label">DAYS</div>
+</div>
+
+<div class="flipbox">
+<div class="flip" id="hours">00</div>
+<div class="label">HOURS</div>
+</div>
+
+<div class="flipbox">
+<div class="flip" id="minutes">00</div>
+<div class="label">MINUTES</div>
+</div>
+
+<div class="flipbox">
+<div class="flip" id="seconds">00</div>
+<div class="label">SECONDS</div>
+</div>
+
+</div>
+
 </div>
 
 <script>
+
 const target =
-new Date("March 15, 2027").getTime();
+new Date("2027-03-15T00:00:00").getTime();
 
-setInterval(function(){
+function pad(n){
+return String(n).padStart(2,'0');
+}
 
-let now = new Date().getTime();
+function updateCountdown(){
 
-let diff = target-now;
+const now=new Date().getTime();
+let diff=target-now;
 
-let days = Math.floor(
-diff/(1000*60*60*24)
+if(diff<0){diff=0;}
+
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor(
+(diff%(1000*60*60*24))/(1000*60*60)
 );
 
-document.getElementById("countdown").innerHTML=
-"T-"+days+" Days";
+const minutes=Math.floor(
+(diff%(1000*60*60))/(1000*60)
+);
 
-},1000);
+const seconds=Math.floor(
+(diff%(1000*60))/1000
+);
+
+document.getElementById("days").innerText=days;
+document.getElementById("hours").innerText=pad(hours);
+document.getElementById("minutes").innerText=pad(minutes);
+document.getElementById("seconds").innerText=pad(seconds);
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
 </script>
 
 </body>
