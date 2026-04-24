@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>One More Lecture</title>
+<style>
+body{
+margin:0;
+background:#000;
+color:#fff;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+h1{
+font-size:72px;
+font-weight:600;
+margin-bottom:20px;
+}
+h2{
+font-weight:300;
+opacity:.8;
+margin-bottom:40px;
+}
+#countdown{
+font-size:88px;
+font-weight:200;
+}
+</style>
+</head>
+
+<body>
+<div>
+<h1>One More Lecture.</h1>
+<h2>Professor Koichi Oda</h2>
+<div id="countdown"></div>
+</div>
+
+<script>
+const target =
+new Date("March 15, 2027").getTime();
+
+setInterval(function(){
+
+let now = new Date().getTime();
+
+let diff = target-now;
+
+let days = Math.floor(
+diff/(1000*60*60*24)
+);
+
+document.getElementById("countdown").innerHTML=
+"T-"+days+" Days";
+
+},1000);
+</script>
+
+</body>
+</html>
