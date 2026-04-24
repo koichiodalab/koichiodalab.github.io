@@ -60,7 +60,6 @@ letter-spacing:6px;
 
 opacity:0;
 transform:scale(.93);
-
 animation:dateReveal 1.8s forwards;
 animation-delay:4s;
 }
@@ -76,14 +75,26 @@ vertical-align:middle;
 margin-top:65px;
 
 font-size:42px;
-font-weight:200;
+font-weight:300;
 letter-spacing:2px;
 
 color:#FFD60A;
-  
+
 opacity:0;
 animation:fadeIn 1.5s forwards;
 animation-delay:5.5s;
+}
+
+.announcement{
+margin-top:28px;
+
+font-size:18px;
+font-weight:300;
+letter-spacing:2px;
+
+opacity:0;
+animation:fadeIn 1.5s forwards;
+animation-delay:6.4s;
 }
 
 @keyframes fadeUp{
@@ -95,7 +106,7 @@ transform:translateY(0);
 
 @keyframes fadeIn{
 to{
-opacity:1;
+opacity:.45;
 }
 }
 
@@ -133,6 +144,11 @@ margin-left:0;
 font-size:28px;
 margin-top:40px;
 }
+
+.announcement{
+font-size:14px;
+margin-top:24px;
+}
 }
 
 </style>
@@ -158,6 +174,10 @@ FINAL LECTURE
 Loading...
 </div>
 
+<div class="announcement">
+Further details coming soon.
+</div>
+
 </div>
 
 <script>
@@ -167,13 +187,13 @@ new Date("2027-03-06T00:00:00").getTime();
 
 function updateCountdown(){
 
-const now=new Date().getTime();
+const now = new Date().getTime();
 
-let diff=target-now;
+let diff = target-now;
 
 if(diff<0){diff=0;}
 
-let days=Math.ceil(
+let days = Math.ceil(
 diff/(1000*60*60*24)
 );
 
@@ -184,7 +204,7 @@ days + " Days";
 
 updateCountdown();
 
-/* 1時間ごと更新で十分。軽い */
+/* 1時間ごと更新 */
 setInterval(updateCountdown,3600000);
 
 </script>
