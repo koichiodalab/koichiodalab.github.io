@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en">
+
 <title>Koichi Oda Final Lecture</title>
 
 <style>
@@ -54,14 +58,12 @@ animation-delay:2.2s;
 .date{
 margin-top:90px;
 
-
 font-family:
 "SF Pro Display",
 -apple-system,
 BlinkMacSystemFont,
 sans-serif;
 
-monospace;
 font-size:120px;
 font-weight:600;
 letter-spacing:4px;
@@ -166,15 +168,15 @@ margin-top:24px;
 
 <div class="container">
 
-<div class="name">
+<div class="name notranslate" translate="no">
 KOICHI ODA
 </div>
 
-<div class="lecture">
+<div class="lecture notranslate" translate="no">
 FINAL LECTURE
 </div>
 
-<div class="date">
+<div class="date notranslate" translate="no">
 2027.03.06<span>Sat</span>
 </div>
 
@@ -182,7 +184,7 @@ FINAL LECTURE
 Loading...
 </div>
 
-<div class="announcement">
+<div class="announcement notranslate" translate="no">
 Further details coming soon.
 </div>
 
@@ -199,13 +201,15 @@ const now = new Date().getTime();
 
 let diff = target-now;
 
-if(diff<0){diff=0;}
+if(diff<0){
+diff=0;
+}
 
 let days = Math.ceil(
 diff/(1000*60*60*24)
 );
 
-document.getElementById("countdown").innerHTML=
+document.getElementById("countdown").innerHTML =
 days + " Days to Go";
 
 }
